@@ -1,7 +1,7 @@
 use crate::token::{lookup_ident, Token};
 use anyhow::Result;
 
-struct Lexer {
+pub struct Lexer {
     input: Vec<u8>,
     position: usize,      // current position in input (points to current char)
     read_position: usize, // current reading position in input (after current char)
@@ -9,7 +9,7 @@ struct Lexer {
 }
 
 impl Lexer {
-    fn new(input: &str) -> Lexer {
+    pub fn new(input: &str) -> Lexer {
         let mut l = Lexer {
             input: input.to_string().into_bytes(),
             position: 0,
@@ -89,18 +89,18 @@ impl Lexer {
                 return Some(if let Ok(num) = self.read_number() {
                     Token::INT(num)
                 } else {
-                    Token::ILLEGAL
+                    Token::Illegal
                 });
             }
             ('a'..='z', _) | ('A'..='Z', _) | ('_', _) => {
                 return Some(if let Ok(ident) = self.read_identifier() {
                     lookup_ident(ident.as_str())
                 } else {
-                    Token::ILLEGAL
+                    Token::Illegal
                 });
             }
             ('\0', _) => return None,
-            _ => Token::ILLEGAL,
+            _ => Token::Illegal,
         };
         self.read_char();
         Some(tok)
