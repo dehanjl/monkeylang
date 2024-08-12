@@ -1,54 +1,54 @@
 #[derive(PartialEq, Debug)]
 pub enum Token {
-    ILLEGAL,
-    EOF,
+    Illegal,
+
     // Identifiers + literals
-    IDENT(String), // add, foobar, x, y, ...
-    INT(String),   // 1343456
+    Ident(String), // add, foobar, x, y, ...
+    Int(String),   // 1343456
 
     // Operators
-    ASSIGN,
-    BANG,
-    PLUS,
-    MINUS,
-    ASTERISK,
-    SLASH,
+    Assign,
+    Bang,
+    Plus,
+    Minus,
+    Asterisk,
+    Slash,
 
-    LT,
-    GT,
+    Less,
+    Greater,
 
-    EQ,
-    NOT_EQ,
+    Equal,
+    NotEqual,
 
     // Delimiters
-    COMMA,
-    SEMICOLON,
+    Comma,
+    Semicolon,
 
-    LPAREN,
-    RPAREN,
-    LBRACE,
-    RBRACE,
+    LeftParen,
+    RightParen,
+    LeftBrace,
+    RightBrace,
     // Keywords
-    FUNCTION,
-    LET,
-    TRUE,
-    FALSE,
-    IF,
-    ELSE,
-    RETURN,
+    Function,
+    Let,
+    True,
+    False,
+    If,
+    Else,
+    Return,
 }
 
 /// Acts as a lookup table for keywords
 /// Returns the keyword if it exists, otherwise returns a `Token::IDENT`
 pub fn lookup_ident(ident: &str) -> Token {
     match ident {
-        "fn" => Token::FUNCTION,
-        "let" => Token::LET,
-        "true" => Token::TRUE,
-        "false" => Token::FALSE,
-        "if" => Token::IF,
-        "else" => Token::ELSE,
-        "return" => Token::RETURN,
-        _ => Token::IDENT(ident.to_string()),
+        "fn" => Token::Function,
+        "let" => Token::Let,
+        "true" => Token::True,
+        "false" => Token::False,
+        "if" => Token::If,
+        "else" => Token::Else,
+        "return" => Token::Return,
+        _ => Token::Ident(ident.to_string()),
     }
 }
