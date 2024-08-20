@@ -39,7 +39,7 @@ type LetStatement struct {
 func (ls *LetStatement) statementNode()       {}
 func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
 
-// Indentifier represents an ident in a let statement. Implements the Expression interface.
+// Identifier represents an ident in a let statement. Implements the Expression interface.
 type Identifier struct {
 	Token token.Token // the token.IDENT token
 	Value string

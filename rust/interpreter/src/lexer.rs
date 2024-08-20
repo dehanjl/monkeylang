@@ -44,6 +44,7 @@ impl Lexer {
         while self.ch.is_ascii_alphabetic() || self.ch == '_' {
             self.read_char();
         }
+        
         Ok(String::from_utf8(
             self.input[position..self.position].to_vec(),
         )?)
