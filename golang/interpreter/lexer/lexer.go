@@ -1,6 +1,7 @@
 package lexer
 
 import (
+	"iter"
 	"monkey/token"
 )
 
@@ -102,6 +103,16 @@ func (l *Lexer) NextToken() token.Token {
 
 	l.readChar()
 	return tok
+}
+
+func (l *Lexer) Iterator() iter.Seq[token.Token] {
+	return func(yield func(token.Token) bool) {
+		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
+			if !yield(tok) {
+				return
+			}
+		}
+	}
 }
 
 func newToken(tokenType token.TokenType, ch byte) token.Token {
